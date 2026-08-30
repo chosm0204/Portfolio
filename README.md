@@ -91,6 +91,8 @@ CSS 변수로 두면 `grep`으로 검사할 수 있고, 다이어그램 SVG까�
 
 한글 조판에서는 `word-break: keep-all`이 필수입니다. 없으면 단어 중간에서 줄이 바뀝니다.
 
+실측값과 측정 방법은 [`qa/REPORT.md`](qa/REPORT.md)에 있습니다. 아직 측정하지 않은 항목도 함께 적었습니다.
+
 ---
 
 ## 검증되지 않은 주장을 막는 장치
@@ -146,6 +148,7 @@ scripts/
   content-rules.json  검사 규칙
 .githooks/
   pre-commit          커밋 시점 게이트
+qa/REPORT.md      품질 점검 실측 기록
 FACTS.md          확정 수치와 출처
 CLAUDE.md         작업 규칙 — 톤·디자인 토큰·모션·품질 기준
 ```
