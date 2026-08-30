@@ -36,6 +36,7 @@
   /* 모션 */
   --ease: cubic-bezier(0.2, 0, 0, 1);
   --dur-hover: 120ms;
+  --dur-reveal: 460ms;
 }
 
 /* ===========================================================
@@ -133,12 +134,33 @@ svg {
 }
 
 /* ===========================================================
+   스크롤 진입 — 뷰포트에 들어올 때 한 번만 올라오며 나타난다.
+
+   여기에는 **완성 상태만** 둔다. 숨김(opacity:0)은 `components/reveal.ts`의
+   인라인 스크립트가 넣는 <style>에만 있다.
+   그래서 정적 HTML·JS 비활성·감속 설정·크롤러에서는 아무것도 숨지 않는다.
+   =========================================================== */
+[data-reveal][data-revealed] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-reveal) var(--ease) var(--reveal-delay, 0ms),
+    transform var(--dur-reveal) var(--ease) var(--reveal-delay, 0ms);
+}
+
+/* ===========================================================
    모션 — prefers-reduced-motion 대응
    지표 진입·전환·호버를 전부 즉시 완성 상태로 둔다.
    =========================================================== */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  /* 스크립트가 숨긴 뒤에 설정이 바뀌어도 내용이 남아 있게 한다 */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   *,
@@ -202,6 +224,12 @@ svg {
   *::after {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+  }
+
+  /* 아직 화면에 들어오지 않아 숨어 있던 블록도 종이에는 전부 나온다 */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   /* 제목이 페이지 끝에 홀로 남지 않게 한다 */

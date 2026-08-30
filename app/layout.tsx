@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 
+import { Reveal } from "@/components/Reveal";
 import { OG_IMAGE, OG_IMAGE_URL } from "@/lib/metadata";
+import { REVEAL_SCRIPT } from "@/lib/reveal";
 
 import { jetbrainsMono, pretendard } from "./fonts";
 import "./globals.css";
@@ -47,7 +49,13 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko" className={`${pretendard.variable} ${jetbrainsMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        {/* 본문이 그려지기 전에 실행돼야 깜빡임이 없다.
+            숨김 규칙은 이 스크립트 안에만 있다 — 실행되지 않으면 전부 보이는 상태 그대로다. */}
+        <script dangerouslySetInnerHTML={{ __html: REVEAL_SCRIPT }} />
+        {children}
+        <Reveal />
+      </body>
     </html>
   );
 }

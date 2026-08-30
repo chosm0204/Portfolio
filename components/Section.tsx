@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { reveal } from "@/lib/reveal";
+
 import styles from "./Section.module.css";
 
 type SectionProps = {
@@ -39,8 +41,12 @@ export function Section({
       className={className ? `${styles.section} ${className}` : styles.section}
     >
       <div className={styles.wrap}>
-        <span className={styles.kicker}>{kicker}</span>
+        {/* 키커 → 제목 순으로 한 박자 늦게 들어온다. 마크업은 그대로 두고 각각 진입시킨다. */}
+        <span {...reveal()} className={styles.kicker}>
+          {kicker}
+        </span>
         <h2
+          {...reveal(1)}
           id={headingId}
           className={titleClassName ?? styles.title}
         >

@@ -6,6 +6,7 @@ import {
   caseTitleTransitionName,
   TitleTransition,
 } from "@/components/TitleTransition";
+import { reveal } from "@/lib/reveal";
 import type { SelectedWorkContent } from "@/types/home";
 
 import styles from "./SelectedWork.module.css";
@@ -21,11 +22,16 @@ export function SelectedWork({ content }: SelectedWorkProps) {
       kicker={content.head.kicker}
       title={content.head.title}
     >
-      {content.items.map((item) => {
+      {content.items.map((item, index) => {
         const titleId = `work-${item.id}-title`;
 
         return (
-          <article key={item.id} className={styles.card} aria-labelledby={titleId}>
+          <article
+            key={item.id}
+            {...reveal(index)}
+            className={styles.card}
+            aria-labelledby={titleId}
+          >
             {/* 카드 제목 → 케이스 상세 제목으로 이어지는 전환의 출발점 */}
             <TitleTransition name={caseTitleTransitionName(item.id)}>
               <h3 id={titleId} className={styles.title}>
@@ -48,7 +54,8 @@ export function SelectedWork({ content }: SelectedWorkProps) {
               ))}
             </ul>
             <p className={styles.role}>{item.role}</p>
-            <Shot shot={item.shot} />
+            {/* 카드가 통째로 진입한다. 사진이 또 나타나면 한 카드가 두 번 움직인다. */}
+            <Shot shot={item.shot} reveal={false} />
             <Link
               className={styles.more}
               href={item.href}

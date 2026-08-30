@@ -3,6 +3,7 @@ import Link from "next/link";
 import { RichText, RichTextLines } from "@/components/RichText";
 import { caseTitleTransitionName, TitleTransition } from "@/components/TitleTransition";
 import { home } from "@/content/home";
+import { reveal } from "@/lib/reveal";
 import type { CaseContent } from "@/types/case";
 
 import { CaseBlocks } from "./CaseBlocks";
@@ -99,13 +100,13 @@ export function CaseView({ content }: CaseViewProps) {
                   : { "aria-label": section.kicker })}
               >
                 <div className={styles.wrap}>
-                  <span className={styles.kicker}>
+                  <span {...reveal()} className={styles.kicker}>
                     {section.no ? <i className={styles.kickerNo}>{section.no}</i> : null}
                     {section.kicker}
                   </span>
 
                   {section.title ? (
-                    <h2 id={headingId} className={styles.sectionTitle}>
+                    <h2 {...reveal(1)} id={headingId} className={styles.sectionTitle}>
                       {section.title}
                     </h2>
                   ) : null}

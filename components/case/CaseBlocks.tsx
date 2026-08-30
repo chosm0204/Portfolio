@@ -2,6 +2,7 @@ import { Fragment } from "react";
 
 import { RichText, RichTextLines } from "@/components/RichText";
 import { Shot } from "@/components/Shot";
+import { reveal } from "@/lib/reveal";
 import type { CaseBlock, CaseDiagramId } from "@/types/case";
 
 import { CaseMetrics } from "./CaseMetrics";
@@ -145,7 +146,7 @@ function Block({ block }: { block: CaseBlock }) {
 
     case "figure":
       return (
-        <figure className={styles.figure}>
+        <figure {...reveal()} className={styles.figure}>
           <div className={styles.figureBody}>
             <Diagram id={block.diagram} />
           </div>

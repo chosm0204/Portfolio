@@ -1,5 +1,6 @@
 import { Section } from "@/components/Section";
 import { Shot } from "@/components/Shot";
+import { reveal } from "@/lib/reveal";
 import type { TimelineContent } from "@/types/home";
 
 import styles from "./Timeline.module.css";
@@ -17,8 +18,9 @@ export function Timeline({ content }: TimelineProps) {
       title={content.head.title}
     >
       <dl className={styles.list}>
-        {content.years.map((group) => (
-          <div key={group.year} className={styles.row}>
+        {/* 연도 줄 단위로 한 칸씩 늦게 들어온다 — 카드마다 흩어지면 산만해진다 */}
+        {content.years.map((group, index) => (
+          <div key={group.year} {...reveal(index)} className={styles.row}>
             <dt className={styles.year}>{group.year}</dt>
             <dd className={styles.entries}>
               <ul className={styles.cards}>
