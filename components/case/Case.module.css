@@ -1,0 +1,725 @@
+/* ===========================================================
+   케이스 상세 공통 스타일.
+   마크업 기준: ARCHIVE/04_IA_DESIGN/samples/case-clue.html · case-dudu.html
+   색은 전부 globals.css의 토큰을 참조한다.
+   =========================================================== */
+
+/* ---------- 레이아웃 ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  position: relative;
+}
+
+.column {
+  min-width: 0;
+}
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+
+/* ---------- 읽기 진행바 ---------- */
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--pt);
+  z-index: 50;
+  transition: width 0.1s linear;
+}
+
+/* ---------- 좌측 목차 ---------- */
+.toc {
+  display: none;
+}
+
+.tocTitle {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--sub);
+  margin-bottom: 16px;
+}
+
+.tocLink {
+  display: block;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--sub);
+  padding: 7px 0 7px 13px;
+  border-left: 2px solid var(--line);
+  transition:
+    color var(--dur-hover) var(--ease),
+    border-left-color var(--dur-hover) var(--ease);
+}
+
+.tocLink:hover {
+  color: var(--fg);
+}
+
+.tocLink.on {
+  color: var(--pt);
+  font-weight: 700;
+  border-left-color: var(--pt);
+}
+
+@media (min-width: 1100px) {
+  .layout {
+    grid-template-columns: 212px minmax(0, 1fr);
+    max-width: 1050px;
+    margin: 0 auto;
+    padding-left: 28px;
+  }
+
+  .toc {
+    display: block;
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    padding-top: 46px;
+    padding-right: 26px;
+    overflow-y: auto;
+  }
+
+  .wrap {
+    margin: 0;
+    padding: 0 40px 0 0;
+    max-width: 720px;
+  }
+}
+
+/* ---------- 되돌아가기 ---------- */
+.backTop {
+  padding-top: 40px;
+}
+
+.back {
+  display: inline-block;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--sub);
+  transition: color var(--dur-hover) var(--ease);
+}
+
+.back:hover {
+  color: var(--fg);
+}
+
+/* ---------- 머리 + 개요 ---------- */
+.head {
+  padding: 34px 0 var(--gap-group);
+}
+
+.caseLabel {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--pt);
+}
+
+.title {
+  font-size: clamp(34px, 5.5vw, 54px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin: 22px 0 14px;
+}
+
+.oneline {
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--fg-soft);
+  max-width: 600px;
+}
+
+.overview {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 28px 26px;
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.overviewList {
+  display: grid;
+  gap: 16px;
+}
+
+.overviewLabel {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--sub);
+  margin-bottom: 3px;
+}
+
+.overviewValue {
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+.roleLabel {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--sub);
+  margin-bottom: 11px;
+}
+
+.roles {
+  display: grid;
+  gap: 7px;
+}
+
+.role {
+  font-size: 15.5px;
+  padding-left: 13px;
+  position: relative;
+  line-height: 1.55;
+}
+
+.role::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--pt);
+  position: absolute;
+  left: 0;
+  top: 9px;
+}
+
+/* 팀과 공동으로 한 일 — 기여 경계를 색으로 구분한다 */
+.roleShared {
+  color: var(--sub);
+}
+
+.roleShared::before {
+  background: var(--dim);
+}
+
+/* ---------- 섹션 ---------- */
+.section {
+  padding: var(--gap-group) 0;
+}
+
+.kicker {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--pt);
+  margin-bottom: 8px;
+}
+
+.kickerNo {
+  display: inline-block;
+  margin-right: 9px;
+  color: var(--sub);
+  font-weight: 700;
+  font-style: normal;
+}
+
+.sectionTitle {
+  font-size: clamp(23px, 3.2vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.34;
+  margin-bottom: 32px;
+}
+
+.heading {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.headingSpaced {
+  margin-top: 44px;
+}
+
+/* ---------- 본문 ---------- */
+.lead {
+  font-size: 18.5px;
+  line-height: 1.72;
+  color: var(--fg-soft);
+  margin-bottom: 20px;
+}
+
+.leadQuestion {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.55;
+  margin-bottom: 30px;
+}
+
+.paragraph {
+  line-height: 1.75;
+}
+
+.paragraph + .paragraph {
+  margin-top: 18px;
+}
+
+.strong {
+  font-weight: 700;
+}
+
+.mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-feature-settings: "tnum";
+  font-size: 15px;
+}
+
+.sub {
+  color: var(--sub);
+}
+
+/* 판단을 박아 두는 인용 블록 */
+.note {
+  border-left: 3px solid var(--pt);
+  padding: 2px 0 2px 18px;
+  margin: 26px 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--fg-soft);
+}
+
+.noteRule {
+  font-size: 18.5px;
+  font-weight: 700;
+}
+
+/* 규칙 note는 첫 줄만 크게 두고 나머지는 본문 크기로 되돌린다 */
+.noteRuleTail {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.noteLesson {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+/* ---------- 리스트 ---------- */
+.list {
+  display: grid;
+  gap: 11px;
+  margin: 20px 0;
+}
+
+.listItem {
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.7;
+  font-size: 16.5px;
+}
+
+.listItem::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--pt);
+  position: absolute;
+  left: 0;
+  top: 11px;
+}
+
+/* ---------- 표 ---------- */
+.tableScroll {
+  margin: 24px 0;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15.5px;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.table th {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--sub);
+  border-bottom: 1px solid #d6dade;
+  white-space: nowrap;
+}
+
+.cellSub {
+  color: var(--sub);
+}
+
+/* 검토 끝에 고른 안 */
+.rowPick td {
+  background: var(--pt-bg);
+}
+
+.rowPick td:first-child {
+  font-weight: 700;
+  color: var(--pt);
+}
+
+.cellPoint {
+  color: var(--pt);
+}
+
+/* ---------- 다이어그램 ---------- */
+.figure {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 30px 26px;
+  margin: 28px 0;
+}
+
+.figureBody {
+  min-width: 0;
+}
+
+.figureCaption {
+  font-size: 13.5px;
+  color: var(--sub);
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+/* ---------- 지표 ---------- */
+.metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 44px;
+  margin-bottom: 36px;
+}
+
+/* 큰 지표 숫자 — 포인트 색 허용 자리 */
+.metricValue {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-feature-settings: "tnum";
+  font-size: clamp(40px, 6vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: var(--pt);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s var(--ease);
+}
+
+.metrics[data-on="true"] .metricValue {
+  opacity: 1;
+  transform: none;
+}
+
+.metricLabel {
+  font-size: 13.5px;
+  color: var(--sub);
+  margin-top: 6px;
+}
+
+.bars {
+  display: grid;
+  gap: 11px;
+  max-width: 560px;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 62px 1fr 78px;
+  align-items: center;
+  gap: 14px;
+}
+
+.barTag {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--sub);
+}
+
+.barTrack {
+  height: 28px;
+  border-radius: 5px;
+  background: #e6e9ec;
+  overflow: hidden;
+}
+
+/* After 막대 — 포인트 색 허용 자리 */
+.barFill {
+  display: block;
+  height: 100%;
+  border-radius: 5px;
+  background: var(--pt);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.62s var(--ease);
+}
+
+.barFillDim {
+  background: var(--dim);
+  transition-delay: 0.06s;
+}
+
+.bars[data-on="true"] .barFill {
+  transform: scaleX(1);
+}
+
+.barValue {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-feature-settings: "tnum";
+  font-size: 15px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.caption {
+  font-size: 13.5px;
+  color: var(--sub);
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+/* 움직임을 줄이는 설정이면 지표는 처음부터 완성 상태로 둔다 */
+@media (prefers-reduced-motion: reduce) {
+  .metricValue {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .barFill {
+    transform: scaleX(1) !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- 막혔던 지점 ---------- */
+.challenge {
+  margin-top: 52px;
+  padding-top: 36px;
+  border-top: 1px solid var(--line);
+}
+
+.challenge:first-child {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.challengeNo {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--pt);
+  margin-bottom: 8px;
+}
+
+.challengeTitle {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+/* ---------- 자료 ---------- */
+.links {
+  display: grid;
+  gap: 2px;
+  margin-top: 8px;
+}
+
+.linkRow {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.linkItem:last-child .linkRow {
+  border-bottom: none;
+}
+
+.linkKey {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--sub);
+  min-width: 110px;
+}
+
+/* 링크 — 포인트 색 허용 자리 */
+.linkValue {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--pt);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--dur-hover) var(--ease);
+}
+
+.linkRow:hover .linkValue {
+  text-decoration-color: currentColor;
+}
+
+/* href가 없는 자료는 링크가 아니다 — 초록을 쓰지 않는다 */
+.linkValuePlain {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.linkNote {
+  font-size: 13.5px;
+  color: var(--sub);
+  font-weight: 400;
+}
+
+/* ---------- 꼬리말 ---------- */
+.footer {
+  padding: 0 0 90px;
+  font-size: 14px;
+  color: var(--sub);
+}
+
+/* ---------- 반응형 ---------- */
+@media (max-width: 640px) {
+  .overview {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .metrics {
+    gap: 28px;
+  }
+
+  .linkRow {
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+
+  .figure {
+    padding: 24px 18px;
+  }
+
+  /* 다이어그램은 줄이지 않고 가로로 밀어서 본다 — 글자가 뭉개지지 않게 */
+  .figureBody {
+    overflow-x: auto;
+  }
+
+  .figureBody svg {
+    min-width: 560px;
+  }
+}
+
+/* ---------- 인쇄 ---------- */
+@media print {
+  .bar,
+  .toc {
+    display: none !important;
+  }
+
+  .layout {
+    display: block;
+    max-width: none;
+    padding-left: 0;
+  }
+
+  .wrap {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .section {
+    padding: 26px 0;
+  }
+
+  .head {
+    padding: 0 0 26px;
+  }
+
+  .backTop,
+  .back {
+    display: none !important;
+  }
+
+  /* 섹션 제목이 페이지 끝에 홀로 남지 않게 한다 */
+  .kicker,
+  .sectionTitle,
+  .heading,
+  .challengeNo,
+  .challengeTitle,
+  .lead,
+  .leadQuestion {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .figure,
+  .tableScroll,
+  .note,
+  .metrics,
+  .bars,
+  .overview,
+  .challenge,
+  .linkRow {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .tableScroll {
+    overflow-x: visible;
+  }
+
+  .table tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* 배지·지표·표 강조 배경을 종이에서도 유지한다 */
+  .rowPick td,
+  .barTrack,
+  .barFill,
+  .barFillDim,
+  .figure,
+  .overview {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 진입 애니메이션 없이 완성 상태로 인쇄한다 */
+  .metricValue {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .barFill {
+    transform: scaleX(1) !important;
+  }
+}

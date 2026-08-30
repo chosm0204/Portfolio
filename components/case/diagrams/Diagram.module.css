@@ -1,0 +1,109 @@
+/* 다이어그램 공통 — 색을 전부 디자인 토큰에 묶는다.
+   샘플의 하드코딩 색(#1F5F4A, #C9CED4 …)을 여기서 한 번만 해석한다. */
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* ---------- 도형 ---------- */
+.fillPt {
+  fill: var(--pt);
+}
+
+.fillDim {
+  fill: var(--dim);
+}
+
+.fillPtBg {
+  fill: var(--pt-bg);
+  stroke: var(--pt);
+  stroke-width: 1.2;
+}
+
+.boxIdle {
+  fill: var(--ph-bg);
+  stroke: var(--line);
+}
+
+.strokeLine {
+  stroke: var(--line);
+}
+
+.arrow {
+  stroke: var(--sub);
+  stroke-width: 1.4;
+  fill: none;
+  stroke-linecap: round;
+}
+
+/* ---------- 글자 ---------- */
+.label {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  fill: var(--sub);
+}
+
+.title {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 13.5px;
+  fill: var(--fg);
+}
+
+/* 채워진 딥그린 위에 얹는 글자 */
+.onFill {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 12.5px;
+  fill: var(--card);
+}
+
+/* 회색 막대 위에 얹는 글자 */
+.onDim {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 12.5px;
+  fill: var(--sub);
+}
+
+/* 상자 안 글자 */
+.inBox {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  fill: var(--sub);
+}
+
+.point {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 12.5px;
+  fill: var(--pt);
+}
+
+.mini {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  fill: var(--sub);
+}
+
+/* 지표 숫자 — 등폭 */
+.num {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 13.5px;
+  fill: var(--pt);
+}
+
+.numDim {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 13.5px;
+  fill: var(--sub);
+}

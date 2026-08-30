@@ -1,0 +1,21 @@
+.list {
+  display: grid;
+  gap: 44px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  margin-bottom: var(--gap-comp);
+}
+
+.body {
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.strong {
+  font-weight: 600;
+}

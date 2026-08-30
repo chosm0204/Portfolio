@@ -1,0 +1,65 @@
+/* 사진 자리.
+   비율을 먼저 고정해 나중에 이미지를 끼워도 레이아웃이 밀리지 않는다.
+   교체할 때는 `shot.image` 한 필드만 채운다. */
+.shot {
+  margin-top: 22px;
+}
+
+/* 스크린샷·사진 기본 처리 — 라운드 12px + 옅은 그림자 (CLAUDE.md) */
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 30px -12px rgba(20, 23, 28, 0.16);
+  background: var(--card);
+}
+
+.ph {
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  background: var(--ph-bg);
+  border: 1px dashed var(--dim);
+  color: var(--sub);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+  font-size: 12.5px;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+}
+
+.shot[data-ratio="4/3"] .ph {
+  aspect-ratio: 4 / 3;
+}
+
+.shot[data-ratio="3/4"] .ph {
+  aspect-ratio: 3 / 4;
+}
+
+/* 세로 사진은 본문 폭을 다 쓰면 지나치게 커진다 */
+.shot[data-ratio="3/4"] {
+  max-width: 420px;
+}
+
+.caption {
+  font-size: 13.5px;
+  color: var(--sub);
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+@media print {
+  /* 사진이 페이지 경계에서 잘리지 않게 한다. */
+  .shot {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .image {
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,79 @@
+/* CONTACT는 국문 제목 자리에 문장형 h2가 온다 (home-full.html 기준). */
+.heading {
+  font-size: clamp(28px, 3.4vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+  margin-bottom: 24px;
+}
+
+.body {
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.push {
+  margin-top: 20px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.links {
+  margin-top: 44px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.list {
+  display: grid;
+  gap: 2px;
+}
+
+.link {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.item:last-child .link {
+  border-bottom: none;
+}
+
+.key {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sub);
+  min-width: 96px;
+  letter-spacing: 0.02em;
+}
+
+/* 링크 — 포인트 색 허용 자리 ⑤ */
+.value {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--pt);
+  word-break: break-all;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--dur-hover) var(--ease);
+}
+
+.link:hover .value {
+  text-decoration-color: currentColor;
+}
+
+.note {
+  font-size: 14px;
+  color: var(--sub);
+  font-weight: 400;
+}
+
+@media (max-width: 640px) {
+  .link {
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+}

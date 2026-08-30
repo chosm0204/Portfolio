@@ -1,0 +1,11 @@
+.footer {
+  padding: 0 0 90px;
+  font-size: 14px;
+  color: var(--sub);
+}
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}

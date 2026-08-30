@@ -1,0 +1,20 @@
+# 의존성 · 빌드
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# 원자료 — 개인정보 포함. 별도 백업.
+ARCHIVE/
+
+# 비공개 작업 규칙
+CLAUDE.local.md
+
+# 환경
+.env*
+!.env.example
+
+# OS · 편집기
+.DS_Store
+Thumbs.db
+*.log

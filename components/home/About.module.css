@@ -1,0 +1,18 @@
+.body {
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.proof {
+  margin-top: var(--gap-in);
+  padding-top: var(--gap-in);
+  border-top: 1px solid var(--line);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--sub);
+}
+
+.strong {
+  color: var(--fg);
+  font-weight: 600;
+}

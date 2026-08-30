@@ -1,0 +1,57 @@
+.list {
+  display: grid;
+  gap: var(--gap-in);
+  margin: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 66px 1fr;
+  gap: 22px;
+  align-items: start;
+  padding-bottom: var(--gap-in);
+  border-bottom: 1px solid var(--line);
+}
+
+.row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* 연도 — JetBrains Mono + tnum으로 자릿수 정렬.
+   포인트 색을 쓰지 않는다. 한 줄에 초록은 계보 배지 하나만 남긴다. */
+.year {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-feature-settings: "tnum";
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sub);
+  padding-top: 5px;
+  margin: 0;
+}
+
+.entries {
+  font-size: 17px;
+  line-height: 1.9;
+  margin: 0;
+}
+
+/* 계보 배지 — 이 활동이 어느 프로젝트로 이어졌는지.
+   포인트 색 허용 자리 ④ 컨셉 배지 */
+.lineage {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--pt);
+  background: var(--pt-bg);
+  padding: 2px 8px;
+  border-radius: 5px;
+  margin-left: 4px;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}

@@ -1,0 +1,48 @@
+.hero {
+  padding: clamp(80px, 14vh, 140px) 0 var(--gap-group);
+}
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+
+.title {
+  font-size: clamp(30px, 4.4vw, 46px);
+  font-weight: 800;
+  line-height: 1.28;
+  letter-spacing: -0.035em;
+  margin-bottom: 26px;
+}
+
+.line {
+  display: block;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--sub);
+  letter-spacing: 0.01em;
+}
+
+/* 작은 원형 초상 — 지름 64px. 히어로의 무게 중심을 문장에 남긴다. */
+.portrait {
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  box-shadow: 0 6px 18px -10px rgba(20, 23, 28, 0.28);
+}
+
+@media print {
+  .portrait {
+    box-shadow: none;
+  }
+}

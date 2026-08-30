@@ -1,0 +1,18 @@
+.list {
+  display: grid;
+  gap: 52px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  margin-bottom: var(--gap-comp);
+}
+
+.body {
+  font-size: 17px;
+  color: var(--fg-soft);
+  line-height: 1.7;
+}
