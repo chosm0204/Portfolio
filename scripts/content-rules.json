@@ -1,0 +1,42 @@
+{
+  "$comment": "공개 규칙. 프로젝트별 금지 주장은 content-rules.local.json에 둔다 (git 제외).",
+
+  "targets": ["content", "app", "components", "lib", "types"],
+
+  "forbidden": [
+    {
+      "id": "hype",
+      "level": "block",
+      "why": "구체적 근거 없이 쓰지 않는다",
+      "patterns": ["전문가", "혁신적", "독창적", "완벽한", "최고의", "최초의"]
+    },
+    {
+      "id": "school",
+      "level": "block",
+      "why": "학교가 식별되는 고유명사를 쓰지 않는다",
+      "patterns": ["성결"]
+    },
+    {
+      "id": "hedge",
+      "level": "warn",
+      "why": "해명·완곡 어미. 짧게 끊고 단정한다",
+      "patterns": ["니까요", "하려고 합니다", "다 보면"]
+    }
+  ],
+
+  "secrets": [
+    { "id": "apikey", "level": "block", "pattern": "(?:api[_-]?key|secret|token)\\s*[:=]\\s*[\"'][A-Za-z0-9_\\-]{16,}[\"']" },
+    { "id": "openai", "level": "block", "pattern": "sk-[A-Za-z0-9]{20,}" },
+    { "id": "google", "level": "block", "pattern": "AIza[A-Za-z0-9_\\-]{30,}" }
+  ],
+
+  "privacy": [
+    {
+      "id": "phone",
+      "level": "block",
+      "why": "전화번호는 조각으로만 둔다. PhoneLink가 브라우저에서 조립한다",
+      "pattern": "01[016789][-\\s]?\\d{3,4}[-\\s]?\\d{4}",
+      "allowIn": ["components/home/PhoneLink.tsx"]
+    }
+  ]
+}

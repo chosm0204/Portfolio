@@ -1,0 +1,20 @@
+#!/bin/sh
+# 콘텐츠 게이트.
+#
+# git 훅은 어느 도구로 커밋하든 반드시 지나가는 유일한 공통 층이다.
+# 문서는 안 읽을 수 있지만 이건 못 피한다.
+#
+# 설치:  git config core.hooksPath .githooks
+# 우회:  git commit --no-verify   (정말 필요할 때만)
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "! node 없음 — 콘텐츠 검사를 건너뛴다"
+  exit 0
+fi
+
+node scripts/check-content.mjs --staged || {
+  echo ""
+  echo "커밋을 중단했다. 위 항목을 고치고 다시 시도한다."
+  echo "규칙 자체가 틀렸다면 scripts/content-rules*.json 을 고친다."
+  exit 1
+}
