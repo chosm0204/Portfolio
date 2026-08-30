@@ -8,7 +8,7 @@ type TimelineProps = {
   content: TimelineContent;
 };
 
-/** 연도 → 활동·수상. 프로젝트명은 계보 배지로만 나온다. */
+/** 연도 → 활동·수상. 등급은 배지로, 프로젝트명은 계보 표시로만 나온다. */
 export function Timeline({ content }: TimelineProps) {
   return (
     <Section
@@ -21,12 +21,27 @@ export function Timeline({ content }: TimelineProps) {
           <div key={group.year} className={styles.row}>
             <dt className={styles.year}>{group.year}</dt>
             <dd className={styles.entries}>
-              <ul>
+              <ul className={styles.cards}>
                 {group.entries.map((entry) => (
-                  <li key={entry.label}>
-                    {entry.label}
+                  <li
+                    key={`${entry.label}${entry.lineage ?? ""}`}
+                    className={styles.card}
+                  >
+                    <p className={styles.head}>
+                      {entry.awards?.map((award) => (
+                        <span key={award} className={styles.award}>
+                          {award}
+                        </span>
+                      ))}
+                      <span className={styles.name}>{entry.label}</span>
+                    </p>
                     {entry.lineage ? (
-                      <span className={styles.lineage}>{`→ ${entry.lineage}`}</span>
+                      <p className={styles.lineage}>
+                        <span aria-hidden="true" className={styles.arrow}>
+                          ↳
+                        </span>
+                        {`${entry.lineage}에서 이어짐`}
+                      </p>
                     ) : null}
                   </li>
                 ))}

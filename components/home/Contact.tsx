@@ -10,7 +10,9 @@ type ContactProps = {
 
 /**
  * 마무리. 히어로("짐작으로 만들지 않습니다")와 수미상관을 이룬다.
- * 상단 네비게이션은 두지 않으므로, 이 링크 목록만 `<nav>`로 감싼다.
+ *
+ * 링크 값은 히어로 인적사항 표와 같다(`content/home.ts`의 상수 하나에서 온다).
+ * 히어로 표는 훑고 지나갈 사람을 위한 자리, 여기는 다 읽고 연락할 사람을 위한 자리다.
  */
 export function Contact({ content }: ContactProps) {
   return (

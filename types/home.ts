@@ -51,9 +51,32 @@ export type ShotSlot = {
   readonly image?: ShotImage;
 };
 
+/**
+ * 히어로 인적사항 표의 한 줄 — 라벨/값 2열.
+ * CONTACT의 링크 목록과 값은 같지만 역할이 다르다.
+ * 여기는 첫 화면 스캔용, CONTACT는 마무리 맥락이다.
+ */
+export type HeroProfileRow = {
+  readonly label: string;
+  readonly value?: string;
+  readonly href?: string;
+  readonly external?: boolean;
+  /**
+   * 전화번호 — 봇 스크래핑 방지.
+   * 완성된 번호도 `tel:` href도 서버 HTML에 남기지 않는다. `PhoneLink`가 브라우저에서 조립한다.
+   */
+  readonly phoneParts?: readonly string[];
+};
+
 export type HeroContent = {
+  /** 첫 화면에서 가장 큰 글자. 사람이 먼저 온다. */
+  readonly name: string;
+  /** 이름 바로 아래 한 줄. 무엇을 하는 사람인지. */
+  readonly role: string;
+  /** 주장 — 이름 아래 부제 자리로 내려온다. */
   readonly lines: readonly string[];
-  readonly identity: string;
+  /** 라벨/값 2열. 읽지 않고 훑을 사람을 위한 자리다. */
+  readonly profile: readonly HeroProfileRow[];
   /** 좌우 분할의 오른쪽에 놓는 사각 초상. 문장과 사람을 첫 화면에서 같이 보여준다. */
   readonly portrait: {
     readonly src: StaticImageData;
@@ -78,8 +101,11 @@ export type PrinciplesContent = {
 };
 
 export type TimelineEntry = {
+  /** 기록 이름. 등급은 `awards`로 따로 뽑는다. 예: `학과 경진대회` */
   readonly label: string;
-  /** 계보 배지 — 이 활동이 어느 프로젝트로 이어졌는지. 예: `CLUE` */
+  /** 수상 등급 배지. 예: `대상`, `우수상`. 수상이 아닌 기록은 비운다. */
+  readonly awards?: readonly string[];
+  /** 계보 — 이 기록이 어느 프로젝트에서 나왔는지. 예: `CLUE` */
   readonly lineage?: string;
 };
 
@@ -154,7 +180,20 @@ export type ContactContent = {
   readonly links: readonly ContactLink[];
 };
 
+/** 고정 네비게이션의 한 항목. `id`는 실제 섹션 id와 같아야 한다. */
+export type NavItem = {
+  readonly id: string;
+  readonly label: string;
+};
+
+export type NavContent = {
+  /** `<nav aria-label>` — 스크린리더가 이 네비게이션을 다른 것과 구분하는 이름. */
+  readonly label: string;
+  readonly items: readonly NavItem[];
+};
+
 export type HomeContent = {
+  readonly nav: NavContent;
   readonly hero: HeroContent;
   readonly about: AboutContent;
   readonly principles: PrinciplesContent;

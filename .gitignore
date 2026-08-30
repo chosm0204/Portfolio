@@ -19,3 +19,4 @@ CLAUDE.local.md
 Thumbs.db
 *.log
 scripts/content-rules.local.json
+qa/shots/

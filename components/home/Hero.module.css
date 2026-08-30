@@ -6,25 +6,54 @@
     calc((100% - var(--maxw-wide)) / 2 + var(--pad-x))
   );
 
-  padding-block: clamp(80px, 14vh, 140px) var(--gap-group);
+  /* 아래쪽은 비운다. 다음 섹션(ABOUT)이 이미 --gap-group을 위로 밀고 있어서
+     여기서 한 번 더 주면 첫 화면과 본문 사이에 그룹 간 여백이 두 번 들어간다. */
+  padding-block: clamp(64px, 11vh, 112px) 0;
   padding-left: var(--hero-left);
   padding-right: var(--pad-x);
 }
 
+/* 왼쪽 두 칸(이름·주장 / 인적사항)에 오른쪽 사진이 세로로 걸친다.
+   DOM 순서(intro → portrait → profile)가 좁은 화면의 읽기 순서와 그대로 같다. */
 .wrap {
   max-width: calc(var(--maxw-wide) - 2 * var(--pad-x));
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
-  gap: 56px;
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr) clamp(300px, 26vw, 380px);
+  grid-template-areas:
+    "intro   portrait"
+    "profile portrait";
+  column-gap: 56px;
+  row-gap: 0;
+  align-items: start;
 }
 
-.title {
-  font-size: clamp(30px, 4.4vw, 46px);
+.intro {
+  grid-area: intro;
+}
+
+/* 이름 — 첫 화면에서 가장 큰 글자. 사람이 먼저 온다. */
+.name {
+  font-size: clamp(40px, 6vw, 72px);
   font-weight: 800;
-  line-height: 1.28;
-  letter-spacing: -0.035em;
-  margin-bottom: 26px;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.role {
+  margin-top: var(--gap-comp);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--sub);
+  letter-spacing: 0.01em;
+}
+
+/* 주장 — 이름 아래 부제 자리. 크기는 내려가지만 굵기로 무게를 지킨다. */
+.claim {
+  margin-top: 22px;
+  font-size: clamp(19px, 2.2vw, 25px);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.025em;
 }
 
 /* 사진이 옆에 오면서 문장 폭이 좁아졌다.
@@ -34,43 +63,137 @@
   text-wrap: balance;
 }
 
-.identity {
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--sub);
-  letter-spacing: 0.01em;
-}
-
-/* 사각 초상 — 라운드 12px + 옅은 그림자 (CLAUDE.md 이미지 규칙) */
+/* 사각 초상 — 라운드 12px + 옅은 그림자 (CLAUDE.md 이미지 규칙).
+   next/image가 박아 넣는 width/height는 여기서 덮는다. 비율만 정사각으로 고정한다. */
 .portrait {
-  width: 280px;
-  height: 280px;
+  grid-area: portrait;
+  align-self: center;
   justify-self: end;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
   border-radius: 12px;
   object-fit: cover;
   border: 1px solid var(--line);
   box-shadow: 0 10px 30px -12px rgba(20, 23, 28, 0.16);
 }
 
+/* 인적사항 — 라벨/값 2열. 읽지 않고 훑을 사람이 여기서 멈춘다. */
+.profile {
+  grid-area: profile;
+  margin-top: 36px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  max-width: 460px;
+}
+
+.link {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  gap: 14px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.item:last-child .link {
+  border-bottom: none;
+}
+
+.key {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--sub);
+  letter-spacing: 0.08em;
+}
+
+/* 링크 — 포인트 색 허용 자리 ⑤ */
+.value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--pt);
+  word-break: break-all;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--dur-hover) var(--ease);
+}
+
+.link:hover .value {
+  text-decoration-color: currentColor;
+}
+
 /* 사진이 옆에 있으면 문장 폭이 줄어든다.
-   280px을 빼고도 제목이 두세 줄로 끊길 만큼 남지 않으면 세로로 쌓는다. */
+   300px을 빼고도 제목이 두세 줄로 끊길 만큼 남지 않으면 세로로 쌓는다.
+   쌓을 때는 이름 → 얼굴 → 인적사항 순서로 둔다. */
 @media (max-width: 860px) {
   .wrap {
-    grid-template-columns: 1fr;
-    gap: var(--gap-in);
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "intro"
+      "portrait"
+      "profile";
   }
 
   .portrait {
-    width: 168px;
-    height: 168px;
     justify-self: start;
+    width: clamp(200px, 56vw, 280px);
+    margin-top: var(--gap-in);
+  }
+
+  .profile {
+    margin-top: var(--gap-in);
   }
 }
 
+@media (max-width: 400px) {
+  .link {
+    grid-template-columns: 66px minmax(0, 1fr);
+    gap: 10px;
+  }
+}
+
+/* 종이에서는 vw가 화면과 다르게 잡힌다. 히어로 치수를 전부 고정값으로 못 박는다. */
 @media print {
+  .hero {
+    padding-block: 0 20px;
+  }
+
+  /* 종이에서도 좌우로 편다. 위 860px 규칙이 areas까지 단일 열로 바꿔 두므로 여기서 되돌린다. */
+  .wrap {
+    grid-template-columns: minmax(0, 1fr) 132px;
+    grid-template-areas:
+      "intro   portrait"
+      "profile portrait";
+    column-gap: 28px;
+  }
+
+  .name {
+    font-size: 30pt;
+  }
+
+  .claim {
+    font-size: 13pt;
+    margin-top: 12px;
+  }
+
   .portrait {
-    width: 150px;
-    height: 150px;
+    width: 132px;
+    margin-top: 0;
     box-shadow: none;
+  }
+
+  .profile {
+    margin-top: 16px;
+  }
+
+  .link {
+    padding: 4px 0;
+  }
+
+  /* globals.css는 외부 링크 뒤에 주소를 찍는다. 여기서는 값 자체가 이미 주소다.
+     게다가 `.link`가 grid라서 ::after가 격자 칸으로 떨어져 라벨 열에서 잘린다. */
+  .link[href^="http"]::after {
+    content: none;
   }
 }

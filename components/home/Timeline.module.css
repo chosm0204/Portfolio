@@ -19,30 +19,77 @@
 }
 
 /* 연도 — JetBrains Mono + tnum으로 자릿수 정렬.
-   포인트 색을 쓰지 않는다. 한 줄에 초록은 계보 배지 하나만 남긴다. */
+   포인트 색을 쓰지 않는다. 한 줄에 초록은 등급 배지 하나만 남긴다.
+   padding-top은 카드 첫 줄의 글자 중심에 맞춘 값이다. */
 .year {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-feature-settings: "tnum";
   font-size: 14px;
   font-weight: 700;
   color: var(--sub);
-  padding-top: 5px;
+  padding-top: 13px;
   margin: 0;
 }
 
 .entries {
-  font-size: 17px;
-  line-height: 1.9;
   margin: 0;
 }
 
 /* 항목이 짧아 한 줄씩 쌓으면 오른쪽이 비어 버린다.
    폭이 남으면 단으로 나눠 넓은 컨테이너를 실제로 채운다.
-   min()이 없으면 좁은 화면에서 360px 트랙이 그대로 남아 가로로 넘친다. */
-.entries ul {
+   min()이 없으면 좁은 화면에서 296px 트랙이 그대로 남아 가로로 넘친다. */
+.cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
-  column-gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 296px), 1fr));
+  gap: 8px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 13px 15px;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.name {
+  font-weight: 600;
+}
+
+/* 등급 배지 — 포인트 색 허용 자리 ④ 컨셉 배지.
+   등급별로 색을 나누지 않는다. 회색으로 내리면 한눈에 훑을 수 없어지는 정보라서 초록을 쓴다. */
+.award {
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--pt-bg);
+  color: var(--pt);
+  white-space: nowrap;
+}
+
+/* 계보 — 이 기록이 어느 프로젝트에서 나왔는지.
+   글로 이미 읽히는 정보라 색을 얹지 않는다. 카드 안의 초록은 등급 배지 하나로 족하다. */
+.lineage {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-top: 5px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--sub);
+}
+
+.arrow {
+  flex: none;
 }
 
 /* 목록과 사진 사이는 그룹 내 여백으로 띄운다. Shot 자체 여백 22px에 더해진다. */
@@ -50,22 +97,27 @@
   margin-top: 14px;
 }
 
-/* 계보 배지 — 이 활동이 어느 프로젝트로 이어졌는지.
-   포인트 색 허용 자리 ④ 컨셉 배지 */
-.lineage {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--pt);
-  background: var(--pt-bg);
-  padding: 2px 8px;
-  border-radius: 5px;
-  margin-left: 4px;
-  white-space: nowrap;
-}
-
 @media (max-width: 640px) {
   .row {
     grid-template-columns: 1fr;
-    gap: 6px;
+    gap: 10px;
+  }
+
+  .year {
+    padding-top: 0;
+  }
+}
+
+@media print {
+  .cards {
+    gap: 5px;
+  }
+
+  .card {
+    padding: 6px 10px;
+  }
+
+  .lineage {
+    margin-top: 2px;
   }
 }

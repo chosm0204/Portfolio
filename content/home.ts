@@ -13,13 +13,44 @@ import type { HomeContent } from "@/types/home";
  * 2026-08-31 축소 — 한눈에 읽히지 않는다는 지적에 따라 본문 분량을 절반 가까이 줄였다.
  * 문장을 새로 쓰지 않고 기존 문장에서 핵심만 남겼다. 사실·수치·기여 경계는 그대로다.
  */
+
+/* 연락처 값 — 히어로 인적사항 표와 CONTACT 링크 목록이 같은 값을 쓴다.
+   두 곳에 적어 두면 한쪽만 고쳐질 수 있어 상수로 묶는다. */
+const EMAIL = "choseung1234@naver.com";
+const GITHUB = "github.com/chosm0204";
+const BLOG = "chodding.tistory.com";
+/** 봇 스크래핑 방지 — 조각으로만 둔다. 조립은 `PhoneLink`가 브라우저에서 한다. */
+const PHONE_PARTS = ["010", "9565", "7199"] as const;
+
 export const home: HomeContent = {
+  // 긴 한 장짜리 페이지의 이동 수단. 라벨은 각 섹션 키커를 그대로 쓴다.
+  // PRINCIPLES·TIMELINE은 항목으로 세우지 않는다 — 좁은 화면에서 알약이 화면을 넘는다.
+  // 그 구간에서는 바로 앞 항목(ABOUT)이 켜진 채로 남는다.
+  nav: {
+    label: "섹션 바로가기",
+    items: [
+      { id: "about", label: "ABOUT" },
+      { id: "work", label: "WORK" },
+      { id: "teaching", label: "TEACHING" },
+      { id: "contact", label: "CONTACT" },
+    ],
+  },
+
   hero: {
+    name: "조승민",
+    role: "프론트엔드 · AI",
     lines: [
       "짐작으로 만들지 않습니다.",
       "기준을 먼저 정하고, 만든 뒤에는 얼마나 나아졌는지 검증합니다.",
     ],
-    identity: "조승민 · 프론트엔드 · AI",
+    // 첫 화면에서 훑고 지나갈 사람을 위한 표. 개인정보는 이 네 줄이 전부다.
+    // 생년월일·학번·학교는 넣지 않는다 (CLAUDE.md 공개 전 점검).
+    profile: [
+      { label: "EMAIL", value: EMAIL, href: `mailto:${EMAIL}` },
+      { label: "GITHUB", value: GITHUB, href: `https://${GITHUB}`, external: true },
+      { label: "기록", value: BLOG, href: `https://${BLOG}`, external: true },
+      { label: "전화", phoneParts: PHONE_PARTS },
+    ],
     portrait: {
       src: profile,
       alt: "조승민",
@@ -66,22 +97,23 @@ export const home: HomeContent = {
 
   timeline: {
     head: { id: "timeline", kicker: "TIMELINE", title: "기록" },
+    // 등급을 `awards`로 뽑아 카드 배지로 세운다. 쓰인 낱말은 바꾸지 않았다.
     years: [
       {
         year: "2021",
-        entries: [{ label: "학과 경진대회 장려상" }],
+        entries: [{ label: "학과 경진대회", awards: ["장려상"] }],
       },
       {
         year: "2022",
-        entries: [{ label: "학과 경진대회 우수상 · 최우수상" }],
+        entries: [{ label: "학과 경진대회", awards: ["우수상", "최우수상"] }],
       },
       {
         year: "2025",
         entries: [
           { label: "멋쟁이사자처럼 13기 프론트엔드 수료" },
-          { label: "학과 경진대회 특별상", lineage: "DUDU" },
-          { label: "IAAI CDC 은상", lineage: "TOTTO" },
-          { label: "교내 튜터링 우수상" },
+          { label: "학과 경진대회", awards: ["특별상"], lineage: "DUDU" },
+          { label: "IAAI CDC", awards: ["은상"], lineage: "TOTTO" },
+          { label: "교내 튜터링", awards: ["우수상"] },
         ],
       },
       {
@@ -89,8 +121,8 @@ export const home: HomeContent = {
         entries: [
           { label: "멋쟁이사자처럼 14기 대표" },
           { label: "한이음 드림업 선정", lineage: "CLUE" },
-          { label: "학과 경진대회 대상", lineage: "CLUE" },
-          { label: "IPACT 우수논문상", lineage: "CLUE 논문" },
+          { label: "학과 경진대회", awards: ["대상"], lineage: "CLUE" },
+          { label: "IPACT", awards: ["우수논문상"], lineage: "CLUE 논문" },
           { label: "JCCT 논문 게재", lineage: "CLUE 논문" },
           { label: "학생연구 선정", lineage: "CLUE 후속 연구" },
           { label: "AI 디지털 배움터 강의 시작" },
@@ -242,26 +274,25 @@ export const home: HomeContent = {
     links: [
       {
         key: "이메일",
-        value: "choseung1234@naver.com",
-        href: "mailto:choseung1234@naver.com",
+        value: EMAIL,
+        href: `mailto:${EMAIL}`,
       },
       {
         key: "GitHub",
-        value: "github.com/chosm0204",
-        href: "https://github.com/chosm0204",
+        value: GITHUB,
+        href: `https://${GITHUB}`,
         external: true,
       },
       {
         key: "알고리즘 기록",
-        value: "chodding.tistory.com",
-        href: "https://chodding.tistory.com",
+        value: BLOG,
+        href: `https://${BLOG}`,
         note: "프로그래머스 풀이 36편",
         external: true,
       },
       {
         key: "전화",
-        // 봇 스크래핑 방지 — 조각으로만 둔다. 조립은 `PhoneLink`가 브라우저에서 한다.
-        phoneParts: ["010", "9565", "7199"],
+        phoneParts: PHONE_PARTS,
       },
     ],
   },
