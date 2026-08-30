@@ -1,8 +1,12 @@
 /* 사진 자리.
    비율을 먼저 고정해 나중에 이미지를 끼워도 레이아웃이 밀리지 않는다.
    교체할 때는 `shot.image` 한 필드만 채운다. */
+/* 사진 상한은 폭이 아니라 **화면에서 차지하는 높이**로 정한다.
+   어느 비율이든 600px 안팎이 되도록 비율별로 다른 상한을 둔다.
+   호출부가 --shot-max로 덮어쓸 수 있다. */
 .shot {
   margin-top: 22px;
+  max-width: var(--shot-max, 100%);
 }
 
 /* 스크린샷·사진 기본 처리 — 라운드 12px + 옅은 그림자 (CLAUDE.md) */
@@ -44,9 +48,22 @@
   aspect-ratio: 3 / 4;
 }
 
-/* 세로 사진은 본문 폭을 다 쓰면 지나치게 커진다 */
+/* 16/9 → 596px · 3/2 → 600px · 4/3 → 600px · 3/4 → 640px 높이 */
+.shot[data-ratio="16/9"] {
+  max-width: var(--shot-max, 1060px);
+}
+
+.shot[data-ratio="3/2"] {
+  max-width: var(--shot-max, 900px);
+}
+
+.shot[data-ratio="4/3"] {
+  max-width: var(--shot-max, 800px);
+}
+
+/* 세로 사진은 폭을 다 쓰면 지나치게 커진다 */
 .shot[data-ratio="3/4"] {
-  max-width: 420px;
+  max-width: var(--shot-max, 480px);
 }
 
 .caption {

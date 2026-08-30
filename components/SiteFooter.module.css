@@ -4,8 +4,9 @@
   color: var(--sub);
 }
 
+/* 섹션과 같은 껍데기 — 좌측 정렬선을 맞춘다 */
 .wrap {
-  max-width: var(--maxw);
+  max-width: var(--maxw-wide);
   margin: 0 auto;
   padding: 0 var(--pad-x);
 }

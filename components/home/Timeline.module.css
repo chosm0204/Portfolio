@@ -36,6 +36,15 @@
   margin: 0;
 }
 
+/* 항목이 짧아 한 줄씩 쌓으면 오른쪽이 비어 버린다.
+   폭이 남으면 단으로 나눠 넓은 컨테이너를 실제로 채운다.
+   min()이 없으면 좁은 화면에서 360px 트랙이 그대로 남아 가로로 넘친다. */
+.entries ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+  column-gap: 40px;
+}
+
 /* 목록과 사진 사이는 그룹 내 여백으로 띄운다. Shot 자체 여백 22px에 더해진다. */
 .shot {
   margin-top: 14px;

@@ -1,6 +1,8 @@
+/* 읽는 글만 있는 섹션이라 폭을 넓히지 않는다. 껍데기만 넓은 컨테이너를 쓴다. */
 .list {
   display: grid;
   gap: 52px;
+  max-width: var(--measure);
 }
 
 .title {

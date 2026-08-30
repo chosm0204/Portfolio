@@ -1,6 +1,8 @@
+/* 읽는 글은 넓은 껍데기 안에서도 읽기 폭(--measure)을 지킨다 */
 .body {
   font-size: 17px;
   line-height: 1.7;
+  max-width: var(--measure);
 }
 
 .proof {
@@ -10,6 +12,7 @@
   font-size: 17px;
   line-height: 1.7;
   color: var(--sub);
+  max-width: var(--measure);
 }
 
 .strong {

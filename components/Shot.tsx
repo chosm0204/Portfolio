@@ -35,7 +35,7 @@ export function Shot({ shot, caption }: ShotProps) {
           sizes={
             image.maxWidth
               ? `(max-width: ${image.maxWidth}px) 100vw, ${image.maxWidth}px`
-              : "(max-width: 760px) 100vw, 720px"
+              : "(max-width: 1160px) 100vw, 1060px"
           }
           priority={image.priority}
           placeholder="blur"

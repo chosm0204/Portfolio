@@ -106,7 +106,8 @@ export const home: HomeContent = {
       image: {
         src: ipactPresent,
         alt: "학술대회에서 ACID 구조 설계 논문을 발표하는 모습",
-        maxWidth: 664,
+        // 3/2 사진 상한 (Shot.module.css)
+        maxWidth: 900,
       },
     },
   },
@@ -135,8 +136,8 @@ export const home: HomeContent = {
           image: {
             src: clueWorkbench,
             alt: "CLUE 3패널 워크벤치 — 왼쪽 원본 PDF 뷰어, 가운데 구조 복원 문서, 오른쪽 ACID 검증 리스트",
-            // 카드 안쪽 폭 = 720 − 컨테이너 패딩 56 − 카드 패딩 60
-            maxWidth: 604,
+            // 카드 안쪽 폭 = 1160 − 컨테이너 패딩 56 − 카드 패딩 72
+            maxWidth: 1032,
           },
         },
         href: "/work/clue",
@@ -163,7 +164,8 @@ export const home: HomeContent = {
           image: {
             src: duduScreens,
             alt: "DUDU 학생 화면 — 궁금한 것을 고르고 누구에게 물을지 선택하는 흐름",
-            maxWidth: 604,
+            // 카드 안쪽 폭 = 1160 − 컨테이너 패딩 56 − 카드 패딩 72
+            maxWidth: 1032,
           },
         },
         href: "/work/dudu",
@@ -193,7 +195,8 @@ export const home: HomeContent = {
             src: likelionSession,
             // 사진에 찍힌 그대로 적는다. 앞에서 설명하는 장면이 아니다.
             alt: "멋쟁이사자처럼 세션 — 실습실에서 노트북으로 실습하는 참가자들",
-            maxWidth: 420,
+            // 3/4 사진 상한 (Shot.module.css)
+            maxWidth: 480,
           },
         },
       },
@@ -213,7 +216,8 @@ export const home: HomeContent = {
           image: {
             src: digitalBaeumteo,
             alt: "AI 디지털 배움터 교육장에서 바이브코딩 강의를 진행하는 모습",
-            maxWidth: 664,
+            // 4/3 사진 상한 (Shot.module.css)
+            maxWidth: 800,
           },
         },
       },

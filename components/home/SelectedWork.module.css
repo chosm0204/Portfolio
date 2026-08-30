@@ -1,9 +1,21 @@
+/* 카드는 넓은 껍데기를 그대로 쓴다 — 안에 든 사진이 커져야 한다.
+   글(제목·요약·역할)만 읽기 폭으로 되돌린다. */
 .card {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 32px 30px;
   margin-bottom: 24px;
+
+  /* 카드 안에서는 비율별 상한을 풀고 카드 폭을 꽉 채운다.
+     사진마다 오른쪽이 다르게 남으면 카드가 어긋나 보인다. */
+  --shot-max: 100%;
+}
+
+@media (min-width: 900px) {
+  .card {
+    padding: 38px 36px;
+  }
 }
 
 .card:last-child {
@@ -21,6 +33,7 @@
 .summary {
   font-size: 17px;
   line-height: 1.7;
+  max-width: var(--measure);
 }
 
 .badges {
@@ -28,6 +41,7 @@
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 20px;
+  max-width: var(--measure);
 }
 
 /* 컨셉 배지 — 포인트 색 허용 자리 ④ */

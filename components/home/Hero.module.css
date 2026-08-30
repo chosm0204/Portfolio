@@ -1,9 +1,9 @@
-/* 왼쪽 선은 아래 섹션들과 맞추고, 오른쪽으로만 300px 넓힌다.
-   사진 240px을 빼고도 문장이 본문 폭(664px)만큼 남아야 줄이 찢어지지 않는다. */
+/* 왼쪽 선은 아래 섹션들과 같은 자리에 온다 — 넓은 껍데기(--maxw-wide) 기준.
+   오른쪽 끝까지 써서 사진을 넓은 컨테이너의 오른쪽 가장자리에 붙인다. */
 .hero {
   --hero-left: max(
     var(--pad-x),
-    calc((100% - var(--maxw)) / 2 + var(--pad-x))
+    calc((100% - var(--maxw-wide)) / 2 + var(--pad-x))
   );
 
   padding-block: clamp(80px, 14vh, 140px) var(--gap-group);
@@ -12,10 +12,10 @@
 }
 
 .wrap {
-  max-width: calc(var(--maxw) - 2 * var(--pad-x) + 300px);
+  max-width: calc(var(--maxw-wide) - 2 * var(--pad-x));
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 240px;
-  gap: 44px;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 56px;
   align-items: center;
 }
 
@@ -43,8 +43,8 @@
 
 /* 사각 초상 — 라운드 12px + 옅은 그림자 (CLAUDE.md 이미지 규칙) */
 .portrait {
-  width: 240px;
-  height: 240px;
+  width: 280px;
+  height: 280px;
   justify-self: end;
   border-radius: 12px;
   object-fit: cover;
@@ -52,8 +52,9 @@
   box-shadow: 0 10px 30px -12px rgba(20, 23, 28, 0.16);
 }
 
-/* 좁은 화면에서는 세로로 쌓고, 사진이 화면을 잡아먹지 않게 줄인다. */
-@media (max-width: 700px) {
+/* 사진이 옆에 있으면 문장 폭이 줄어든다.
+   280px을 빼고도 제목이 두세 줄로 끊길 만큼 남지 않으면 세로로 쌓는다. */
+@media (max-width: 860px) {
   .wrap {
     grid-template-columns: 1fr;
     gap: var(--gap-in);

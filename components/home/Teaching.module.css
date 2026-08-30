@@ -11,9 +11,11 @@
   margin-bottom: var(--gap-comp);
 }
 
+/* 글은 읽기 폭, 사진은 넓은 폭. 사진 상한은 Shot.module.css가 비율별로 정한다. */
 .body {
   font-size: 17px;
   line-height: 1.7;
+  max-width: var(--measure);
 }
 
 .strong {

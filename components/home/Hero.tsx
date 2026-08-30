@@ -24,13 +24,13 @@ export function Hero({ content }: HeroProps) {
           <p className={styles.identity}>{content.identity}</p>
         </div>
 
-        {/* 240px 사각 초상. 첫 화면에서 문장과 사람을 같이 보여준다. */}
+        {/* 280px 사각 초상. 첫 화면에서 문장과 사람을 같이 보여준다. */}
         <Image
           className={styles.portrait}
           src={content.portrait.src}
           alt={content.portrait.alt}
-          width={240}
-          height={240}
+          width={280}
+          height={280}
           priority
           placeholder="blur"
         />
