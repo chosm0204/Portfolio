@@ -1,11 +1,22 @@
+/* 왼쪽 선은 아래 섹션들과 맞추고, 오른쪽으로만 300px 넓힌다.
+   사진 240px을 빼고도 문장이 본문 폭(664px)만큼 남아야 줄이 찢어지지 않는다. */
 .hero {
-  padding: clamp(80px, 14vh, 140px) 0 var(--gap-group);
+  --hero-left: max(
+    var(--pad-x),
+    calc((100% - var(--maxw)) / 2 + var(--pad-x))
+  );
+
+  padding-block: clamp(80px, 14vh, 140px) var(--gap-group);
+  padding-left: var(--hero-left);
+  padding-right: var(--pad-x);
 }
 
 .wrap {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 0 var(--pad-x);
+  max-width: calc(var(--maxw) - 2 * var(--pad-x) + 300px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 44px;
+  align-items: center;
 }
 
 .title {
@@ -16,33 +27,49 @@
   margin-bottom: 26px;
 }
 
+/* 사진이 옆에 오면서 문장 폭이 좁아졌다.
+   줄 길이를 고르게 나눠 한 단어만 남는 줄이 생기지 않게 한다. */
 .line {
   display: block;
+  text-wrap: balance;
 }
 
 .identity {
-  display: flex;
-  align-items: center;
-  gap: 14px;
   font-size: 17px;
   font-weight: 600;
   color: var(--sub);
   letter-spacing: 0.01em;
 }
 
-/* 작은 원형 초상 — 지름 64px. 히어로의 무게 중심을 문장에 남긴다. */
+/* 사각 초상 — 라운드 12px + 옅은 그림자 (CLAUDE.md 이미지 규칙) */
 .portrait {
-  width: 64px;
-  height: 64px;
-  flex: none;
-  border-radius: 50%;
+  width: 240px;
+  height: 240px;
+  justify-self: end;
+  border-radius: 12px;
   object-fit: cover;
   border: 1px solid var(--line);
-  box-shadow: 0 6px 18px -10px rgba(20, 23, 28, 0.28);
+  box-shadow: 0 10px 30px -12px rgba(20, 23, 28, 0.16);
+}
+
+/* 좁은 화면에서는 세로로 쌓고, 사진이 화면을 잡아먹지 않게 줄인다. */
+@media (max-width: 700px) {
+  .wrap {
+    grid-template-columns: 1fr;
+    gap: var(--gap-in);
+  }
+
+  .portrait {
+    width: 168px;
+    height: 168px;
+    justify-self: start;
+  }
 }
 
 @media print {
   .portrait {
+    width: 150px;
+    height: 150px;
     box-shadow: none;
   }
 }

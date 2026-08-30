@@ -32,6 +32,10 @@
   line-height: 1.6;
 }
 
+.shot[data-ratio="3/2"] .ph {
+  aspect-ratio: 3 / 2;
+}
+
 .shot[data-ratio="4/3"] .ph {
   aspect-ratio: 4 / 3;
 }

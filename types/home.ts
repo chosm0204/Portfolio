@@ -42,9 +42,11 @@ export type ShotImage = {
 export type ShotSlot = {
   /** 나중에 이미지를 끼울 때 식별자로 쓰는 슬롯 이름. */
   readonly slot: string;
-  readonly ratio: "16/9" | "4/3" | "3/4";
+  readonly ratio: "16/9" | "3/2" | "4/3" | "3/4";
   /** 자리표시자에 노출되는 설명. 어떤 사진이 들어갈 자리인지 적는다. */
   readonly placeholder: string;
+  /** 사진만으로 무엇인지 알기 어려울 때만 붙인다. 없으면 쓰지 않는다. */
+  readonly caption?: string;
   /** 사진을 확보하면 이 한 필드만 채운다. 비율은 이미 고정되어 있다. */
   readonly image?: ShotImage;
 };
@@ -52,7 +54,7 @@ export type ShotSlot = {
 export type HeroContent = {
   readonly lines: readonly string[];
   readonly identity: string;
-  /** 정체줄 옆 작은 원형 사진. 히어로의 주인공은 문장이므로 크게 넣지 않는다. */
+  /** 좌우 분할의 오른쪽에 놓는 사각 초상. 문장과 사람을 첫 화면에서 같이 보여준다. */
   readonly portrait: {
     readonly src: StaticImageData;
     readonly alt: string;
@@ -89,6 +91,8 @@ export type TimelineYear = {
 export type TimelineContent = {
   readonly head: SectionHead;
   readonly years: readonly TimelineYear[];
+  /** 목록 뒤에 붙는 근거 사진. 없어도 된다. */
+  readonly shot?: ShotSlot;
 };
 
 /** 배지는 두 그룹뿐이다. `concept`은 채움, `tech`는 테두리. */

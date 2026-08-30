@@ -1,4 +1,5 @@
 import { Section } from "@/components/Section";
+import { Shot } from "@/components/Shot";
 import type { TimelineContent } from "@/types/home";
 
 import styles from "./Timeline.module.css";
@@ -34,6 +35,12 @@ export function Timeline({ content }: TimelineProps) {
           </div>
         ))}
       </dl>
+      {/* 목록만으로는 글자로만 남는 수상 기록에 현장 한 장을 붙인다. */}
+      {content.shot ? (
+        <div className={styles.shot}>
+          <Shot shot={content.shot} />
+        </div>
+      ) : null}
     </Section>
   );
 }

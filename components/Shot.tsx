@@ -17,6 +17,8 @@ type ShotProps = {
  */
 export function Shot({ shot, caption }: ShotProps) {
   const { image } = shot;
+  // 슬롯이 자기 설명을 들고 있으면 그걸 쓴다. 호출부가 넘긴 값이 우선한다.
+  const text = caption ?? shot.caption;
 
   return (
     <figure
@@ -41,7 +43,7 @@ export function Shot({ shot, caption }: ShotProps) {
       ) : (
         <div className={styles.ph}>{shot.placeholder}</div>
       )}
-      {caption ? <figcaption className={styles.caption}>{caption}</figcaption> : null}
+      {text ? <figcaption className={styles.caption}>{text}</figcaption> : null}
     </figure>
   );
 }
